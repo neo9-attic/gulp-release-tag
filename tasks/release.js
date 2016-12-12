@@ -26,13 +26,20 @@ module.exports = function (gulp) {
 			.pipe(git.commit('release: Version ' + version));
 	});
 
+	gulp.task('push-changes', function (next) {
+		var argv = require('minimist')(process.argv.slice(2));
+		var branch = argv['b'] || 'master';
+
+		git.push('origin', branch, next);
+	});
+
 	gulp.task('create-new-tag', function (next) {
 		var version = getPackageJsonVersion();
 
 		git.tag('v' + version, 'v' + version, function (err) {
 			if (err) return next(err);
 
-			git.push('origin', [ 'master', 'develop' ], {args: '--tags'}, next);
+			git.push('origin', 'v' + version, next);
 		});
 	});
 
@@ -40,6 +47,7 @@ module.exports = function (gulp) {
 		runSequence(
 			'bump-version',
 			'commit-changes',
+			'push-changes',
 			'create-new-tag',
 			function (err) {
 				if (err) console.log(err.message);
