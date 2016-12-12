@@ -16,25 +16,49 @@ require('gulp-release-tag')(gulp);
 
 `gulp -T` for a list of available commands
 
-### Workflow
+## Tasks
 
-1. Bumps the versions of your `package.json` and `bower.json`
-2. Create an automatic commit : `release: Version v{version}`
-3. Create a new tag : `v{version}`
-4. Push commit + tag
+### gulp bump-version
+`gulp bump-version`
 
-### Tasks
+Bumps the versions of your `package.json` and `bower.json`
 
-- `bump-version`
-- `commit-changes`
-- `create-new-tag`
-- `release` :
+`-t`: Type (optional), options: `patch`, `minor`, `major`, default: `patch`
+ 
+### gulp commit-changes
+`gulp commit-changes`
 
-task                    | version
-------------------------|-------------------------------------
-gulp release (-t patch) | v0.0.1 -> v0.0.2 + commit + tag + push
-gulp release -t minor   | v0.0.1 -> v0.1.0 + commit + tag + push
-gulp release -t major   | v0.0.1 -> v1.0.1 + commit + tag + push
+Create an automatic commit : `release: Version v{version}`
+
+### gulp push-changes
+`gulp push-changes`
+
+Push commit to a branch
+
+`-b`: Branch (optional), default: `master`
+
+### gulp create-new-tag
+`gulp create-new-tag`
+
+Create a new tag : `v{version}` and push it to origin
+
+### gulp release
+`gulp release`
+
+Run the following sequence:
+
+1. `bump-version`
+2. `commit-changes`
+3. `push-changes`
+3. `create-new-tag`
+
+All options passed to `gulp release` will be used by the different tasks of the sequence.
+
+Task                       | Workflow
+---------------------------|--------------------------------------------------
+gulp release (-b develop)  | v0.0.1 -> v0.0.2 + commit + push develop + tag + push tag
+gulp release (-t minor)    | v0.0.1 -> v0.1.0 + commit + push master + tag + push tag
+gulp release (-t major)    | v0.0.1 -> v1.0.1 + commit + push master + tag + push tag
 
 ## Contributing
 
