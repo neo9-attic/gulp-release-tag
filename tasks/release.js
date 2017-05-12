@@ -15,15 +15,12 @@ module.exports = function (gulp) {
     var type = argv['t'] || 'patch';
     var directory = argv['p'] || './';
 
-    console.log([path.join(directory, 'bower.json'), path.join(directory, 'package.json')]);
-
     return gulp.src([path.join(directory, 'bower.json'), path.join(directory, 'package.json')])
       .pipe(bump({ type: type }).on('error', gutil.log))
       .pipe(gulp.dest(directory));
   });
 
   gulp.task('commit-changes', function () {
-    z
     var version = getPackageJsonVersion();
 
     return gulp.src('.')
