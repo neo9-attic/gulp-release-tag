@@ -1,5 +1,5 @@
 {
-  "name": "gulp-release-tag",
+  "name": "@neo9/gulp-release-tag",
   "version": "1.0.3",
   "description": "",
   "main": "index.js",
