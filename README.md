@@ -1,5 +1,7 @@
-gulp-release-tag
-================
+# No longer actively maintained
+
+## gulp-release-tag
+
 
 > Release plugin for Gulp inspired from [gulp-release-tasks](https://github.com/lfender6445/gulp-release-tasks) that follows automate release workflow guidelines from [gulpjs.org](http://gulpjs.org/recipes/automate-release-workflow.html).
 
